@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.TimeZone;
 import javax.servlet.Filter;
@@ -11,16 +12,11 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
+
 public class TimezoneValidateFilter implements Filter {
 
-    public static final List<String> VALID_TIMEZONES = List.of(
-            "UTC 0", "UTC 1", "UTC 2", "UTC 3", "UTC 4", "UTC 5", "UTC 6", "UTC 7", "UTC 8", "UTC 9", "UTC 10",
-            "UTC 11", "UTC 12", "UTC 13", "UTC-1", "UTC-2", "UTC-3", "UTC-4", "UTC-5", "UTC-6", "UTC-7", "UTC-8",
-            "UTC-9", "UTC-10", "UTC-11", "UTC-12"
-    );
-
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         // Ініціалізація фільтра
     }
 
@@ -48,7 +44,7 @@ public class TimezoneValidateFilter implements Filter {
     }
 
     private boolean isValidTimezone(String timezoneParam) {
-        return VALID_TIMEZONES.contains(timezoneParam) || timezoneParam == null;
+        return timezoneParam == null || timezoneParam.trim().isEmpty() || ZoneId.getAvailableZoneIds().contains(timezoneParam);
     }
 
 }

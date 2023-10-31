@@ -16,7 +16,6 @@
         <filter-name>TimezoneValidateFilter</filter-name>
         <filter-class>org.example.TimezoneValidateFilter</filter-class>
     </filter>
-
     <filter-mapping>
         <filter-name>TimezoneValidateFilter</filter-name>
         <url-pattern>/</url-pattern>
