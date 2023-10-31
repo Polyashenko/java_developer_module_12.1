@@ -1,30 +1,51 @@
-### Task 1 - Create TimeServlet
+This is a Java web application based on the code from the GitHub repository
+https://github.com/Polyashenko/java_developer_servlet_module_11
+The application displays the current time in the specified time zone and stores the last selected time zone in a cookie.
 
-Create a servlet named `TimeServlet` that responds to a GET request at the `/time` endpoint and returns an HTML page
-displaying the current time in the UTC timezone.
+## Task 1 - Connect Thymeleaf
 
-The page should display the time (with second precision) and the timezone. For example, "2022-01-05 12:05:01 UTC."
+To complete Task 1, Thymeleaf has been integrated into the project. The following steps were taken:
 
-Since this is a GET request, you can test it in a web browser. Start the program and make sure it works correctly by
-entering a URL like http://localhost:8080/time in your browser and checking the result.
+1. Thymeleaf was added as a dependency in the project.
 
-### Task 2 - Extend TimeServlet to Accept Timezones
+2. An HTML template was created for rendering the time.
 
-Extend the `TimeServlet` from the previous task to accept a query parameter named `timezone` and return the time in the
-specified timezone.
+3. A servlet was implemented that performs the following actions:
+    - Calculates the current time in the specified time zone.
+    - Passes the calculated parameters and the appropriate HTML template to Thymeleaf.
+    - Returns the results from the Thymeleaf template in the servlet.
 
-For example, if you open a URL like `http://localhost:8080/time?timezone=UTC+2`, you should get a result like
-"2022-01-05 12:05:01 UTC+2."
+## Task 2 - Store Time Zone in Cookie
 
-If the `timezone` parameter is not provided, the servlet should return the time in UTC.
+To complete Task 2, the application stores the last selected time zone in a cookie. The steps for Task 2 were
+implemented as follows:
 
-### Task 3 - Add a WebFilter for Invalid Timezones
+1. When a user accesses the URL with a query parameter "timezone," this time zone value is stored in a cookie named
+   "lastTimezone."
 
-Users may provide an invalid timezone as the `timezone` parameter. In such cases, return a web page with the content
-"Invalid timezone" and an HTTP response code of 400 (Bad Request).
+2. If a user tries to access the page without passing the "timezone" parameter, the application attempts to retrieve
+   the time zone from the "lastTimezone" cookie.
 
-To achieve this, create a web filter named `TimezoneValidateFilter`. This filter should intercept requests to the
-`/time` endpoint, check for the presence of the `timezone` parameter, and validate it.
+3. If the time zone is not found in the cookie, the application uses the UTC time zone as the default.
 
-You can use the `TimeZone` class for timezone validation.
-[Javadoc](https://docs.oracle.com/javase/7/docs/api/java/util/TimeZone.html).
+Example:
+- When a user first accesses the URL "http://localhost:8080/time," the result is displayed as "2022-01-05 10:05:01 UTC".
+
+- If the user then accesses the URL "http://localhost:8080/time?timezone=UTC+2," the result is displayed as "2022-01-05
+  12:05:01 UTC+2," and "UTC+2" is stored in the "lastTimezone" cookie.
+
+- If the user accesses "http://localhost:8080/time" again, the application retrieves the time zone "UTC+2" from the
+  "lastTimezone" cookie and displays the result accordingly.
+
+## Task 3 - Upload Code to GitHub
+
+The code for this project has been uploaded to a new GitHub repository. Here are the steps that were taken to complete
+Task 3:
+
+1. A new GitHub repository was created.
+
+2. All the necessary project files, including the code and configuration files, were added to the repository.
+
+3. Care was taken to ensure that no unnecessary or extraneous files were included in the repository.
+
+4. The code was committed to the repository and pushed to GitHub, making it available for others to view and use.
